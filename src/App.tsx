@@ -1,25 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
+import { FC, SetStateAction, useState } from 'react';
+import { ITask } from './Interfaces'
+
+import TaskList from './Components/TaskList'
+
 import './App.css';
 
-function App() {
+const App: FC = () => {
+
+  const [task, setTask] = useState<string>('')
+  const [description, setDescription] = useState<string>('')
+  const [todo, setTodo] = useState<ITask[]>([])
+  const [isDone, setIsDone] = useState<boolean>(false)
+
+  const handleChangeInputValue = (evt: { target: { name: string; value: SetStateAction<string>; }; }) => {
+    if (evt.target.name === 'task') {
+      setTask(evt.target.value)
+    } else {
+      setDescription(evt.target.value)
+    }
+  }
+
+  const handleSaveTask = (): void => {
+    const newTask = { taskName: task, taskDescription: description, isDone: isDone }
+    setTodo([...todo, newTask])
+    setDescription('')
+    setTask('')
+  }
+
+  const removeTask = (taskNameRemove: string): void => {
+    setTodo(todo.filter((task) => {
+      return task.taskName !== taskNameRemove
+    }))
+  }
+
+
+  const finishTask = () => {
+    setIsDone(true)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+
+    <main className='main'>
+      <header>
+        <input type="text" name='task' placeholder='Put a task' required onChange={handleChangeInputValue} value={task} />
+        <input type="text" name='description' placeholder='Put a description (no required)' onChange={handleChangeInputValue} value={description} />
+        <input type="submit" value="save" onClick={handleSaveTask} />
       </header>
-    </div>
+
+      <div className='todo__list'>
+        {todo.map((task: ITask, key: number) => {
+          return <TaskList key={key} task={task} removeTask={removeTask} />
+        })}
+      </div>
+
+    </main>
+
+
+
   );
 }
 
