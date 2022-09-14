@@ -13,10 +13,14 @@ interface Props {
 
 const TaskList = ({ task, removeTask, finishTask, todo, setTodo }: Props) => {
 
+    // стейт открывающий возможность редактирования задачи
     const [isEdit, setIsEdit] = useState<boolean>(false)
+
+    // стейт хранящий измененную задачу
     const [taskEdit, setTaskEdit] = useState<string>(task.taskName)
 
 
+    // изменяем задачу. Сравниваем задачи по id
     const editCard = (id: number): void => {
         setTodo(todo.map((task) => {
           if (task.id !== id) {
@@ -38,6 +42,7 @@ const TaskList = ({ task, removeTask, finishTask, todo, setTodo }: Props) => {
 
     return (
         <article className={task.isDone ? 'task_done' : 'task'}>
+            
             {
                 isEdit ? (<input className='editInput' value={taskEdit} onChange={(e) => setTaskEdit(e.target.value)} />) : (<h2 className='text'>{task.taskName}</h2>)
             }

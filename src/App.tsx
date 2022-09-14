@@ -4,26 +4,31 @@ import TaskList from './Components/TaskList'
 import './App.css';
 
 const App: FC = () => {
-  const [task, setTask] = useState<string>('')
-  const [todo, setTodo] = useState<ITask[]>([])
+  const [task, setTask] = useState<string>('') // стейт задачи
+  const [todo, setTodo] = useState<ITask[]>([]) // стейт массива задач
 
+
+  // ввод названия задачи уходящий в стейт
   const handleChangeInputValue = (evt: { target: { name: string; value: SetStateAction<string>; }; }) => {
     if (evt.target.name === 'task') {
       setTask(evt.target.value)
     }
   }
 
+  //сохранение задачи с присвоением нужных показателей (название, статус выполнения и id)
   const handleSaveTask = (): void => {
     setTodo([...todo, { taskName: task, isDone: false, id: Math.floor(Math.random() * 99999) }])
     setTask('')
   }
 
+  // удаление задачи с сравнением по ид
   const removeTask = (id: number): void => {
     setTodo(todo.filter((task) => {
       return task.id !== id
     }))
   }
 
+  // аналогично удалению - установка выполненной задачи
   const finishTask = (id: number): void => {
     setTodo(todo.map((task) => {
       if (task.id !== id) {
