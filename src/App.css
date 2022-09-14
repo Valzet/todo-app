@@ -1,1 +1,81 @@
 @import url(./utils/normalize.css);
+
+
+.main {
+    background-color: rgb(58, 58, 58);
+    height: 100vh;
+}
+
+.content {
+    margin: 0 auto;
+    max-width: 600px;
+
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.header {
+    justify-content: center;
+    display: flex;
+    padding-top: 10%;
+    align-items: center;
+}
+
+
+.todo__list {
+    padding-top: 5%;
+    width: 100%;
+    color: white;
+}
+
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px 0;
+    border: 1px solid grey;
+    border-radius: 2px;
+}
+
+.text {
+    margin: 10px;
+}
+
+.task_done {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px 0;
+    border: 1px solid rgb(0, 134, 29);
+}
+
+.task__buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.modal-hidden {
+    display: none;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editInput {
+    color: black;
+    width: 100%;
+}
+
+.button {
+    background-color: rgb(70, 0, 0);
+    border: 1px solid;
+    color: white;
+    border-radius: 4px;
+}

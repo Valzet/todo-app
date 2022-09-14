@@ -1,5 +1,5 @@
-export interface ITask {
+export default interface ITask {
     taskName: string;
-    taskDescription: string;
+    id: number;
     isDone: boolean;
 }
